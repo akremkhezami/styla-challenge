@@ -38,48 +38,41 @@ function main() {
 	.on('data',function(data){
         if (data['id']!=='id'){
             const jsonData = JSON.parse(data['json'])
-            const result = []
             const isValid = Number.isInteger(Math.sqrt(jsonData.length))
-            if (isValid){
-                const matrixSize = Math.sqrt(jsonData.length)
-                let matrix = [];     
-            }
+
 
         matx = listToMatrix(jsonData, Math.sqrt(jsonData.length))
         let matLength = Math.sqrt(jsonData.length)
         if (isValid){
 
-
-        let N = matLength;
         for (let step = 0 ; step < matLength/2 ; step++) {
             let corner = matx[step][step];
 
             // right
-            for (let j = step + 1 ; j < N - step; j++) {
+            for (let j = step + 1 ; j < matLength - step; j++) {
                 [corner, matx[step][j]] = [matx[step][j], corner]
 
             }
 
             // down
-            for (let i = step + 1  ; i < N - step ; i++) {
-                [corner, matx[i][N-step-1]] = [matx[i][N-step-1], corner]
+            for (let i = step + 1  ; i < matLength - step ; i++) {
+                [corner, matx[i][matLength-step-1]] = [matx[i][matLength-step-1], corner]
 
             }
 
             // left
-            for (let j = N - step - 2  ; j > step ; j--) {
-                [corner, matx[N-step-1][j]] = [matx[N-step-1][j], corner]
+            for (let j = matLength - step - 2  ; j > step ; j--) {
+                [corner, matx[matLength-step-1][j]] = [matx[matLength-step-1][j], corner]
 
             }
 
             // up
-            for (let i = N - step - 1  ; i > step ; i--) {
+            for (let i = matLength - step - 1  ; i > step ; i--) {
                 [corner, matx[i][step]] = [matx[i][step], corner]
 
             }
 
             [corner, matx[step][step]] = [matx[step][step], corner]
-
 
         }
   
